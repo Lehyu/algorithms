@@ -1,1 +1,2 @@
-# algorithms
+I haven't wrote data structure and basic algorithms for a long time. And some days, I realized that although I still know how to use 
+STL in C++, I forgot the details of basic data structure and algorithm. This is the reason why I write this repository.

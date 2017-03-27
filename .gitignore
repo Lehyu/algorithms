@@ -1,0 +1,7 @@
+.idea
+.idea/*
+*~
+#*#
+.#*
+*.pyc
+cmake-build-debug
