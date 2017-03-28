@@ -5,8 +5,13 @@
 #ifndef SRC_DLIST_H
 #define SRC_DLIST_H
 
-#include <glob.h>
-#include "Node.h"
+template <typename Object>
+struct _list_node{
+    Object value;
+    _list_node* next;
+    _list_node* prev;
+    _list_node(const Object &v = Object{},  _list_node* p = nullptr,  _list_node* n = nullptr):value{v}, next{n}, prev{p}{}
+};
 
 template <class T, class Ref, class Ptr>
 class __list_iterator{
@@ -18,7 +23,6 @@ public:
     typedef T value_type;
     typedef Ptr pointer;
     typedef Ref reference;
-    typedef size_t size_type;
 
     __list_iterator(_list_node<T>* p);
     __list_iterator();
