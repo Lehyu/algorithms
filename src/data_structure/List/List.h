@@ -17,10 +17,8 @@ template <class T, class Ref, class Ptr>
 class __list_iterator{
 public:
     typedef __list_iterator<T, T&, T*> iterator;
-    typedef __list_iterator<T, const T&, const T*> const_iterator;
     typedef __list_iterator<T, Ref, Ptr> self;
 
-    typedef T value_type;
     typedef Ptr pointer;
     typedef Ref reference;
 
@@ -36,8 +34,10 @@ public:
 
     self & operator++();
     self & operator++(int);
-    self &operator--();
-    self &operator--(int);
+    self & operator--();
+    self & operator--(int);
+    self & operator+(int step);
+    self &operator-(int step);
 
     _list_node<T>* current;
 };
@@ -82,8 +82,7 @@ private:
 
 template <class T, class Ref, class Ptr>
 __list_iterator<T, Ref, Ptr> & __list_iterator<T, Ref, Ptr>::operator++() {
-    if(current->next != nullptr)
-        current = current->next;
+    current = current->next;
     return *this;
 }
 template <class T, class Ref, class Ptr>
@@ -102,7 +101,20 @@ __list_iterator<T, Ref, Ptr> & __list_iterator<T, Ref, Ptr>::operator--(int) {
 
 template <class T, class Ref, class Ptr>
 __list_iterator<T, Ref, Ptr> & __list_iterator<T, Ref, Ptr>::operator--() {
-    if(current->prev != nullptr)
+    current = current->prev;
+    return *this;
+}
+template <class T, class Ref, class Ptr>
+__list_iterator<T, Ref, Ptr>& __list_iterator<T, Ref, Ptr>::operator+(int step) {
+    for(int i = 0; i < step; i++)
+       current = current->next;
+    return *this;
+}
+
+template <class T, class Ref, class Ptr>
+__list_iterator<T, Ref, Ptr>& __list_iterator<T, Ref, Ptr>::operator-(int step) {
+
+    for(int i = 0; i < step; i++)
         current = current->prev;
     return *this;
 }
