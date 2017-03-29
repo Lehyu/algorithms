@@ -2,8 +2,8 @@
 // Created by lehyu on 17-3-28.
 //
 
-#ifndef SRC_DLIST_H
-#define SRC_DLIST_H
+#ifndef LINKED_LIST_H
+#define LINKED_LIST_H
 
 template <typename Object>
 struct _list_node{
@@ -43,14 +43,14 @@ public:
 };
 
 template <class T>
-class List {
+class LinkedList {
 public:
     typedef __list_iterator<T, T&, T*> iterator;
 
 public:
-    List();
-    List(const List& other);
-    ~List();
+    LinkedList();
+    LinkedList(const LinkedList& other);
+    ~LinkedList();
     iterator begin() { return {head->next};};
     iterator end() { return {tail};};
 
@@ -132,11 +132,11 @@ __list_iterator<T, Ref, Ptr>::__list_iterator():current{nullptr} {}
 
 
 /* ----------------------------------------------------------------------------
- * ---------------------implementation of List---------------------------------
+ * ---------------------implementation of LinkedList---------------------------------
  * ----------------------------------------------------------------------------
  * */
 template <class T>
-void List<T>::init() {
+void LinkedList<T>::init() {
     theSize = 0;
     head = new _list_node<T>;
     tail = new _list_node<T>;
@@ -144,41 +144,43 @@ void List<T>::init() {
     tail->prev = head;
 }
 template <class T>
-List<T>::List() {
+LinkedList<T>::LinkedList() {
     init();
 }
 template <class T>
-List<T>::List(const List &other) {
+LinkedList<T>::LinkedList(const LinkedList &other) {
     init();
     for(auto &x: other)
         push_back(x);
 }
 template <class T>
-List<T>::~List() {
+LinkedList<T>::~LinkedList() {
     clear();
     delete head;
     delete tail;
 }
 template <class T>
-void List<T>::clear() {
+void LinkedList<T>::clear() {
     while (!empty())
         pop_back();
 }
 template <class T>
-typename List<T>::iterator List<T>::insert(iterator it, const T &x) {
+typename LinkedList<T>::iterator LinkedList<T>::insert(iterator it, const T &x) {
     _list_node<T>* p = it.current;
+    theSize++;
     return {p->prev = p->prev->next=new _list_node<T>{x, p->prev,p}};
 }
 template <class T>
-typename List<T>::iterator List<T>::erase(iterator it) {
+typename LinkedList<T>::iterator LinkedList<T>::erase(iterator it) {
     _list_node<T>* p = it.current;
     iterator retval{p->next};
     p->prev->next = p->next;
     p->next->prev = p->prev;
+    theSize--;
     return retval;
 }
 template <class T>
-typename List<T>::iterator List<T>::erase(iterator from, iterator to) {
+typename LinkedList<T>::iterator LinkedList<T>::erase(iterator from, iterator to) {
     for(iterator it = from; it != to;)
         it = erase(it);
     return to;
