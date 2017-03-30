@@ -2,8 +2,8 @@
 // Created by lehyu on 17-3-28.
 //
 
-#ifndef LINKED_LIST_H
-#define LINKED_LIST_H
+#ifndef L_LINKED_LIST_H
+#define L_LINKED_LIST_H
 
 template <typename Object>
 struct _list_node{

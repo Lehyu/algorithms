@@ -2,8 +2,8 @@
 // Created by lehyu on 17-3-29.
 //
 
-#ifndef SRC_STACK_H
-#define SRC_STACK_H
+#ifndef L_STACK_H
+#define L_STACK_H
 
 #include <iostream>
 
